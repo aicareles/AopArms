@@ -49,10 +49,10 @@ allprojects {
 }
 
 publish{
-    userOrg = 'fengzhizi715'
+    userOrg = 'superliu'
     groupId = 'cn.com.superLei'
     artifactId = 'aop-arms'
-    publishVersion = '1.0.0'
+    publishVersion = '1.0.1'
     desc = 'A very convenient aop library for Android'
-    website = 'https://github.com/fengzhizi715/SAF-AOP'
+    website = 'https://github.com/AICareless/AopArms'
 }

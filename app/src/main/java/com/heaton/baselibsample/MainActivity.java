@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
         Log.e(TAG, "getArticle: "+article);
     }
 
-    @SingleClick
     public void getUser(View view) {
         ArrayList<User> users = ACache.get(this).getAsList("userList", User.class);
         Log.e(TAG, "getUser: "+users);
@@ -100,6 +99,11 @@ public class MainActivity extends AppCompatActivity {
     @Safe(callBack = "throwMethod")
     public void safe(View view) {
         str.toString();
+    }
+
+    @SingleClick(value = 2000L)
+    private void onclick(){
+        Log.e(TAG, "onclick: >>>>");
     }
 
     private void throwMethod(Throwable throwable){

@@ -16,6 +16,7 @@ import cn.com.superLei.aoparms.annotation.Cache;
 import cn.com.superLei.aoparms.annotation.CacheEvict;
 import cn.com.superLei.aoparms.annotation.Delay;
 import cn.com.superLei.aoparms.annotation.DelayAway;
+import cn.com.superLei.aoparms.annotation.Intercept;
 import cn.com.superLei.aoparms.annotation.Permission;
 import cn.com.superLei.aoparms.annotation.Prefs;
 import cn.com.superLei.aoparms.annotation.PrefsEvict;
@@ -145,4 +146,18 @@ public class MainActivity extends AppCompatActivity {
         Log.e(TAG, "onRequestPermissionsResult: "+requestCode+"permissions:"+permissions.toString());
     }
 
+    @Intercept("login_intercept")
+    public void intercept(View view) {
+        Log.e(TAG, "intercept: 已登陆>>>>");
+    }
+
+    @Prefs(key = "userId")
+    public String login(View view) {
+        return "1";
+    }
+
+    @PrefsEvict(key = "userId")
+    public void logout(View view) {
+        Log.e(TAG, "logout: >>>>>");
+    }
 }

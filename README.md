@@ -26,6 +26,10 @@ buildscript {
 }
 
 ```
+3、在Application中初始化
+```
+AopArms.init(this);
+```
 #### 三、基本使用
 1、缓存篇(可缓存任意类型)
 ```
@@ -162,4 +166,40 @@ buildscript {
     private void onclick(){
         Log.e(TAG, "onclick: >>>>");
     }
+```
+9、拦截篇(如登录)
+```
+1、在需要进行拦截的方法添加注解
+    @Intercept("login_intercept")
+    public void loginIntercept() {
+        Log.e(TAG, "intercept: 已登陆>>>>");
+    }
+2、（建议,统一处理）在Application中进行进行监听拦截回调
+public class MyApplication extends Application {
+
+    private static final String TAG = "MyApplication";
+    private static MyApplication mApplication;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        mApplication = this;
+        AopArms.init(this);
+        AopArms.setInterceptor(new Interceptor() {
+            @Override
+            public boolean intercept(String key, String methodName) throws Throwable {
+                Log.e(TAG, "intercept methodName:>>>>>"+methodName);
+                if ("login_intercept".equals(key)){
+                    String userId = SPUtils.get(mApplication, "userId", "");
+                    if (TextUtils.isEmpty(userId)){
+                        Toast.makeText(mApplication, "您还没有登录", Toast.LENGTH_SHORT).show();
+                        return true;//代表拦截
+                    }
+                }
+                return false;//放行
+            }
+        });
+    }
+}
+
 ```

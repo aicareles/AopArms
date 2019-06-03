@@ -97,5 +97,31 @@
         android:onClick="cancelDelay"
         android:text="取消延迟"/>
 
+    <Button
+        android:id="@+id/intercept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/cancelDelay"
+        android:layout_below="@+id/permission"
+        android:onClick="intercept"
+        android:text="拦截"/>
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/intercept"
+        android:onClick="login"
+        android:text="登录"/>
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/intercept"
+        android:layout_toRightOf="@+id/login"
+        android:onClick="logout"
+        android:text="登出"/>
+
 
 </RelativeLayout>

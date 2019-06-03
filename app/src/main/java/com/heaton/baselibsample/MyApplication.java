@@ -1,8 +1,13 @@
 package com.heaton.baselibsample;
 
 import android.app.Application;
+import android.text.TextUtils;
+import android.util.Log;
+import android.widget.Toast;
 
 import cn.com.superLei.aoparms.AopArms;
+import cn.com.superLei.aoparms.callback.Interceptor;
+import cn.com.superLei.aoparms.common.utils.SPUtils;
 
 
 /**
@@ -32,6 +37,7 @@ import cn.com.superLei.aoparms.AopArms;
  */
 public class MyApplication extends Application {
 
+    private static final String TAG = "MyApplication";
     private static MyApplication mApplication;
 
     @Override
@@ -39,6 +45,21 @@ public class MyApplication extends Application {
         super.onCreate();
         mApplication = this;
         AopArms.init(this);
+
+        AopArms.setInterceptor(new Interceptor() {
+            @Override
+            public boolean intercept(String key, String methodName) throws Throwable {
+                Log.e(TAG, "intercept methodName:>>>>>"+methodName);
+                if ("login_intercept".equals(key)){
+                    String userId = SPUtils.get(mApplication, "userId", "");
+                    if (TextUtils.isEmpty(userId)){
+                        Toast.makeText(mApplication, "您还没有登录", Toast.LENGTH_SHORT).show();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
 
     }
 

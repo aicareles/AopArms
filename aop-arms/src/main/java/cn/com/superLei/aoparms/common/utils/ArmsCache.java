@@ -39,38 +39,38 @@ import java.util.concurrent.atomic.AtomicLong;
  * description $desc$
  * created by jerry on 2019/5/29.
  */
-public class ACache {
+public class ArmsCache {
 
-    private static final String TAG = "ACache";
+    private static final String TAG = "ArmsCache";
     public static final int TIME_HOUR = 60 * 60;
     public static final int TIME_DAY = TIME_HOUR * 24;
     private static final int MAX_SIZE = 1000 * 1000 * 50; // 50 mb
     private static final int MAX_COUNT = Integer.MAX_VALUE; // 不限制存放数据的数量
-    private static Map<String, ACache> mInstanceMap = new HashMap<String, ACache>();
+    private static Map<String, ArmsCache> mInstanceMap = new HashMap<String, ArmsCache>();
     private ACacheManager mCache;
 
-    public static ACache get(Context ctx) {
-        return get(ctx, "ACache");
+    public static ArmsCache get(Context ctx) {
+        return get(ctx, "ArmsCache");
     }
 
-    public static ACache get(Context ctx, String cacheName) {
+    public static ArmsCache get(Context ctx, String cacheName) {
         File f = new File(ctx.getCacheDir(), cacheName);
         return get(f, MAX_SIZE, MAX_COUNT);
     }
 
-    public static ACache get(File cacheDir) {
+    public static ArmsCache get(File cacheDir) {
         return get(cacheDir, MAX_SIZE, MAX_COUNT);
     }
 
-    public static ACache get(Context ctx, long max_zise, int max_count) {
-        File f = new File(ctx.getCacheDir(), "ACache");
+    public static ArmsCache get(Context ctx, long max_zise, int max_count) {
+        File f = new File(ctx.getCacheDir(), "ArmsCache");
         return get(f, max_zise, max_count);
     }
 
-    public static ACache get(File cacheDir, long max_zise, int max_count) {
-        ACache manager = mInstanceMap.get(cacheDir.getAbsoluteFile() + myPid());
+    public static ArmsCache get(File cacheDir, long max_zise, int max_count) {
+        ArmsCache manager = mInstanceMap.get(cacheDir.getAbsoluteFile() + myPid());
         if (manager == null) {
-            manager = new ACache(cacheDir, max_zise, max_count);
+            manager = new ArmsCache(cacheDir, max_zise, max_count);
             mInstanceMap.put(cacheDir.getAbsolutePath() + myPid(), manager);
         }
         return manager;
@@ -80,7 +80,7 @@ public class ACache {
         return "_" + android.os.Process.myPid();
     }
 
-    private ACache(File cacheDir, long max_size, int max_count) {
+    private ArmsCache(File cacheDir, long max_size, int max_count) {
         if (!cacheDir.exists() && !cacheDir.mkdirs()) {
             throw new RuntimeException("can't make dirs in "
                     + cacheDir.getAbsolutePath());

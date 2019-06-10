@@ -17,7 +17,7 @@ import java.util.Map;
  * Created by LiuLei on 2016/7/15.
  *
  */
-public class SPUtils {
+public class ArmsPreference {
 
     /**
      * 保存在手机里面的文件名

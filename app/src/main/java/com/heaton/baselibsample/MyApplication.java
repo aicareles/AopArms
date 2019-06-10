@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import cn.com.superLei.aoparms.AopArms;
 import cn.com.superLei.aoparms.callback.Interceptor;
-import cn.com.superLei.aoparms.common.utils.SPUtils;
+import cn.com.superLei.aoparms.common.utils.ArmsPreference;
 
 
 /**
@@ -51,7 +51,7 @@ public class MyApplication extends Application {
             public boolean intercept(String key, String methodName) throws Throwable {
                 Log.e(TAG, "intercept methodName:>>>>>"+methodName);
                 if ("login_intercept".equals(key)){
-                    String userId = SPUtils.get(mApplication, "userId", "");
+                    String userId = ArmsPreference.get(mApplication, "userId", "");
                     if (TextUtils.isEmpty(userId)){
                         Toast.makeText(mApplication, "您还没有登录", Toast.LENGTH_SHORT).show();
                         return true;

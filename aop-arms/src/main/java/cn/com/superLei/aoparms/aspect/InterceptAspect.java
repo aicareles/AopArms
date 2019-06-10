@@ -7,12 +7,8 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 
-import java.io.Serializable;
-
 import cn.com.superLei.aoparms.AopArms;
-import cn.com.superLei.aoparms.annotation.Cache;
 import cn.com.superLei.aoparms.annotation.Intercept;
-import cn.com.superLei.aoparms.common.utils.ACache;
 
 /**
  * description $desc$

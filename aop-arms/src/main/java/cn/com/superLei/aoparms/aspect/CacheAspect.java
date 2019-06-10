@@ -8,7 +8,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import java.io.Serializable;
 import cn.com.superLei.aoparms.AopArms;
 import cn.com.superLei.aoparms.annotation.Cache;
-import cn.com.superLei.aoparms.common.utils.ACache;
+import cn.com.superLei.aoparms.common.utils.ArmsCache;
 
 /**
  * description $desc$
@@ -28,7 +28,7 @@ public class CacheAspect {
         int expiry = cache.expiry();
 
         Object result = joinPoint.proceed();
-        ACache aCache = ACache.get(AopArms.getContext());
+        ArmsCache aCache = ArmsCache.get(AopArms.getContext());
         if (expiry>0) {
             aCache.put(key,(Serializable)result,expiry);
         } else {

@@ -9,7 +9,7 @@ import org.aspectj.lang.annotation.Pointcut;
 
 import cn.com.superLei.aoparms.AopArms;
 import cn.com.superLei.aoparms.annotation.PrefsEvict;
-import cn.com.superLei.aoparms.common.utils.SPUtils;
+import cn.com.superLei.aoparms.common.utils.ArmsPreference;
 
 
 /**
@@ -33,9 +33,9 @@ public class PrefsEvictAspect {
             if (allEntries){
                 if (!TextUtils.isEmpty(key))
                     throw new IllegalArgumentException("Key cannot have value when cleaning all caches");
-                SPUtils.clear(AopArms.getContext());
+                ArmsPreference.clear(AopArms.getContext());
             }
-            SPUtils.remove(AopArms.getContext(), key);
+            ArmsPreference.remove(AopArms.getContext(), key);
         } else {
             // 不影响原来的流程
             result = joinPoint.proceed();

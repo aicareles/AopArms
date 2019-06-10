@@ -9,7 +9,7 @@ import org.aspectj.lang.annotation.Pointcut;
 
 import cn.com.superLei.aoparms.AopArms;
 import cn.com.superLei.aoparms.annotation.CacheEvict;
-import cn.com.superLei.aoparms.common.utils.ACache;
+import cn.com.superLei.aoparms.common.utils.ArmsCache;
 
 /**
  * description $desc$
@@ -28,7 +28,7 @@ public class CacheEvictAspect {
         String key = cacheEvict.key();
         boolean beforeInvocation = cacheEvict.beforeInvocation();
         boolean allEntries = cacheEvict.allEntries();
-        ACache aCache = ACache.get(AopArms.getContext());
+        ArmsCache aCache = ArmsCache.get(AopArms.getContext());
         Object result = null;
         if (allEntries){
             if (!TextUtils.isEmpty(key))

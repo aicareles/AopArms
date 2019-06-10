@@ -8,7 +8,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 
 import cn.com.superLei.aoparms.AopArms;
 import cn.com.superLei.aoparms.annotation.Prefs;
-import cn.com.superLei.aoparms.common.utils.SPUtils;
+import cn.com.superLei.aoparms.common.utils.ArmsPreference;
 
 
 /**
@@ -32,7 +32,7 @@ public class PrefsAspect {
             String type = ((MethodSignature) joinPoint.getSignature()).getReturnType().toString();
 
             if (!"void".equalsIgnoreCase(type)) {
-                SPUtils.put(AopArms.getContext(), key, result);
+                ArmsPreference.put(AopArms.getContext(), key, result);
             }
         } else {
             // 不影响原来的流程

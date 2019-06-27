@@ -16,7 +16,6 @@ import java.util.List;
 import cn.com.superLei.aoparms.annotation.Async;
 import cn.com.superLei.aoparms.annotation.Cache;
 import cn.com.superLei.aoparms.annotation.CacheEvict;
-import cn.com.superLei.aoparms.annotation.Component;
 import cn.com.superLei.aoparms.annotation.Delay;
 import cn.com.superLei.aoparms.annotation.DelayAway;
 import cn.com.superLei.aoparms.annotation.Intercept;
@@ -27,7 +26,6 @@ import cn.com.superLei.aoparms.annotation.Retry;
 import cn.com.superLei.aoparms.annotation.Safe;
 import cn.com.superLei.aoparms.annotation.Scheduled;
 import cn.com.superLei.aoparms.annotation.SingleClick;
-import cn.com.superLei.aoparms.common.PkgScanner;
 import cn.com.superLei.aoparms.common.utils.ArmsCache;
 import cn.com.superLei.aoparms.common.utils.ArmsPreference;
 
@@ -46,23 +44,6 @@ public class MainActivity extends AppCompatActivity {
         initData();
 
         initArticle();
-
-        PkgScanner scanner = new PkgScanner("com.heaton.baselibsample");
-        try {
-            List<String> scan = scanner.scan();
-            Log.e(TAG, "onCreate: scan>>>>>"+scan.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        PkgScanner scanner2 = new PkgScanner("com.heaton.baselibsample", Component.class);
-        try {
-            List<String> scan = scanner2.scan();
-            Log.e(TAG, "onCreate: scan2>>>>>"+scan.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
 
     }
 

@@ -9,7 +9,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0.0"
+        versionName "1.0.2"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -57,7 +57,8 @@ publish{
     userOrg = 'superliu'
     groupId = 'cn.com.superLei'
     artifactId = 'aop-arms'
-    publishVersion = '1.0.1'
+    publishVersion = '1.0.2'
     desc = 'A very convenient aop library for Android'
     website = 'https://github.com/AICareless/AopArms'
+    licences = ['Apache-2.0']
 }

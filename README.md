@@ -10,7 +10,7 @@ apply plugin: 'android-aspectjx'
 
 dependencies {
     ...
-    implementation 'cn.com.superLei:aop-arms:1.0.1'
+    implementation 'cn.com.superLei:aop-arms:1.0.2'
 }
 ```
 2、项目跟目录的gradle脚本中加入
@@ -48,7 +48,7 @@ AopArms.init(this);
     
 2、获取缓存
     private ArrayList<User> getUser() {
-        return ACache.get(this).getAsList("userList", User.class);
+        return ArmsCache.get(this).getAsList("userList", User.class);
     }
 
 3、移除缓存
@@ -75,6 +75,12 @@ AopArms.init(this);
     @PrefsEvict(key = "article")
     public void removeArticle() {
         Log.e(TAG, "removeArticle: >>>>");
+    }
+
+3、通过key从sp中获取value
+    public void getArticle() {
+        Article article = ArmsPreference.get(this, "article", null);
+        Log.e(TAG, "getArticle: "+article);
     }
 ```
 3、异步篇

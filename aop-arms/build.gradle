@@ -54,9 +54,10 @@ allprojects {
 }
 
 publish{
-    userOrg = 'superliu'
-    groupId = 'cn.com.superLei'
-    artifactId = 'aop-arms'
+    repoName = 'maven'//远程仓库名字,不指明，默认是上传到maven
+    userOrg = 'superliu'//bintray.com的用户名
+    groupId = 'cn.com.superLei'//一个唯一值，默认包名,生成的gradle依赖前缀
+    artifactId = 'aop-arms'//远程仓库包名称
     publishVersion = '1.0.2'
     desc = 'A very convenient aop library for Android'
     website = 'https://github.com/AICareless/AopArms'

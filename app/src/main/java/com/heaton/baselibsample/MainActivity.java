@@ -52,7 +52,12 @@ public class MainActivity extends AppCompatActivity {
         Log.e(TAG, "permission: ");
     }
 
-    @Cache(key = "userList")
+    /**
+     * key：缓存的键
+     * expiry：缓存过期时间,单位s
+     * @return 缓存的值
+     */
+    @Cache(key = "userList", expiry = 60 * 60 * 24)
     private ArrayList<User> initData() {
         ArrayList<User> list = new ArrayList<>();
         for (int i=0; i<5; i++){
@@ -84,12 +89,21 @@ public class MainActivity extends AppCompatActivity {
         Log.e(TAG, "getUser: "+users);
     }
 
-    @CacheEvict(key = "userList")
+    /**
+     * key:缓存的键
+     * beforeInvocation:缓存的清除是否在方法之前执行, 如果出现异常缓存就不会清除   默认false
+     * allEntries：是否清空所有缓存(与key互斥)  默认false
+     */
+    @CacheEvict(key = "userList", beforeInvocation = true, allEntries = false)
     public void removeUser(View view) {
         Log.e(TAG, "removeUser: >>>>");
     }
 
-    @PrefsEvict(key = "article")
+    /**
+     * key:sp的键
+     * allEntries：是否清空所有存储(与key互斥)  默认false
+     */
+    @PrefsEvict(key = "article", allEntries = false)
     public void removeArticle(View view) {
         Log.e(TAG, "removeArticle: >>>>");
     }

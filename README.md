@@ -34,7 +34,12 @@ AopArms.init(this);
 1、缓存篇(可缓存任意类型)
 ```
 1、插入缓存
-    @Cache(key = "userList")
+    /**
+     * key：缓存的键
+     * expiry：缓存过期时间,单位s
+     * @return 缓存的值
+     */
+    @Cache(key = "userList", expiry = 60 * 60 * 24)
     private ArrayList<User> initData() {
         ArrayList<User> list = new ArrayList<>();
         for (int i=0; i<5; i++){
@@ -52,7 +57,12 @@ AopArms.init(this);
     }
 
 3、移除缓存
-    @CacheEvict(key = "userList")
+    /**
+     * key:缓存的键
+     * beforeInvocation:缓存的清除是否在方法之前执行, 如果出现异常缓存就不会清除   默认false
+     * allEntries：是否清空所有缓存(与key互斥)  默认false
+     */
+    @CacheEvict(key = "userList", beforeInvocation = true, allEntries = false)
     public void removeUser() {
         Log.e(TAG, "removeUser: >>>>");
     }
@@ -72,7 +82,11 @@ AopArms.init(this);
     }
     
 2、从sp中移除key
-    @PrefsEvict(key = "article")
+    /**
+     * key:sp的键
+     * allEntries：是否清空所有存储(与key互斥)  默认false
+     */
+    @PrefsEvict(key = "article", allEntries = false)
     public void removeArticle() {
         Log.e(TAG, "removeArticle: >>>>");
     }

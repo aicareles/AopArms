@@ -68,6 +68,8 @@ AopArms.init(this);
     }
     
 ```
+![](https://user-gold-cdn.xitu.io/2019/6/1/16b10cdeae2bfe6a?w=1164&h=59&f=png&s=3012)
+
 2、SharedPreferences篇(可保存对象)
 ```
 1、保存key到sp
@@ -104,8 +106,6 @@ AopArms.init(this);
         Log.e(TAG, "useAync: "+Thread.currentThread().getName());
     }
 ```
-
-![](https://user-gold-cdn.xitu.io/2019/6/1/16b10cdeae2bfe6a?w=1164&h=59&f=png&s=3012)
 
 4、try-catch安全机制篇
 ```
@@ -210,7 +210,7 @@ public class MyApplication extends Application {
             public boolean intercept(String key, String methodName) throws Throwable {
                 Log.e(TAG, "intercept methodName:>>>>>"+methodName);
                 if ("login_intercept".equals(key)){
-                    String userId = SPUtils.get(mApplication, "userId", "");
+                    String userId = ArmsPreference.get(mApplication, "userId", "");
                     if (TextUtils.isEmpty(userId)){
                         Toast.makeText(mApplication, "您还没有登录", Toast.LENGTH_SHORT).show();
                         return true;//代表拦截

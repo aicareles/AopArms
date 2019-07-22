@@ -20,6 +20,7 @@ import cn.com.superLei.aoparms.annotation.SingleClick;
 @Aspect
 public class SingleClickAspect {
     static int TIME_TAG = R.id.click_time;
+
     @Pointcut("execution(@cn.com.superLei.aoparms.annotation.SingleClick * *(..))")//方法切入点
     public void onSingleClickMethod() {
     }
@@ -35,11 +36,22 @@ public class SingleClickAspect {
             Log.d("SingleClickAspect", "lastClickTime:" + lastClickTime);
             long currentTime = Calendar.getInstance().getTimeInMillis();
             long value = singleClick.value();
-            if (currentTime - lastClickTime > value) {//过滤掉500毫秒内的连续点击
+            int[] ids = singleClick.ids();
+
+            if (currentTime - lastClickTime > value || !hasId(ids, view.getId())) {//过滤掉500毫秒内的连续点击
                 view.setTag(TIME_TAG, currentTime);
                 Log.d("SingleClickAspect", "currentTime:" + currentTime);
                 joinPoint.proceed();//执行原方法
             }
+
         }
+    }
+
+    public static boolean hasId(int[] arr, int value) {
+        for (int i : arr) {
+            if (i == value)
+                return true;
+        }
+        return false;
     }
 }

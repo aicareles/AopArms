@@ -54,12 +54,12 @@ allprojects {
 }
 
 publish{
-    repoName = 'maven'//远程仓库名字,不指明，默认是上传到maven
-    userOrg = 'superliu'//bintray.com的用户名
-    groupId = 'cn.com.superLei'//一个唯一值，默认包名,生成的gradle依赖前缀
+    repoName = 'AopArms'//远程仓库名字,不指明，默认是上传到maven
+    userOrg = 'smartwangbin'//bintray.com的用户名
+    groupId = 'cn.com.smartwangbin'//一个唯一值，默认包名,生成的gradle依赖前缀
     artifactId = 'aop-arms'//远程仓库包名称
-    publishVersion = '1.0.2'
-    desc = 'A very convenient aop library for Android'
+    publishVersion = '1.0.0'
+    desc = 'Clone the AopArms for optimization and click anti-shake support to specify id.'
     website = 'https://github.com/AICareless/AopArms'
     licences = ['Apache-2.0']
 }

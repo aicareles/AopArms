@@ -51,6 +51,6 @@ dependencies {
 
 //    implementation 'cn.com.superLei:aop-arms:1.0.2'
     implementation project(':aop-arms')
-    implementation 'com.jakewharton:butterknife:8.5.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 }

@@ -9,10 +9,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.com.superLei.aoparms.annotation.Async;
 import cn.com.superLei.aoparms.annotation.Cache;
 import cn.com.superLei.aoparms.annotation.CacheEvict;
@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         initData();
 
@@ -55,15 +56,16 @@ public class MainActivity extends AppCompatActivity {
     /**
      * key：缓存的键
      * expiry：缓存过期时间,单位s
+     *
      * @return 缓存的值
      */
     @Cache(key = "userList", expiry = 60 * 60 * 24)
     private ArrayList<User> initData() {
         ArrayList<User> list = new ArrayList<>();
-        for (int i=0; i<5; i++){
+        for (int i = 0; i < 5; i++) {
             User user = new User();
-            user.setName("艾神一不小心:"+i);
-            user.setPassword("密码:"+i);
+            user.setName("艾神一不小心:" + i);
+            user.setPassword("密码:" + i);
             list.add(user);
         }
         return list;
@@ -81,12 +83,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void getArticle(View view) {
         Article article = ArmsPreference.get(this, "article", null);
-        Log.e(TAG, "getArticle: "+article);
+        Log.e(TAG, "getArticle: " + article);
     }
 
     public void getUser(View view) {
         ArrayList<User> users = ArmsCache.get(this).getAsList("userList", User.class);
-        Log.e(TAG, "getUser: "+users);
+        Log.e(TAG, "getUser: " + users);
     }
 
     /**
@@ -110,31 +112,31 @@ public class MainActivity extends AppCompatActivity {
 
     @Async
     public void asyn(View view) {
-        Log.e(TAG, "useAync: "+Thread.currentThread().getName());
+        Log.e(TAG, "useAync: " + Thread.currentThread().getName());
     }
-    
+
     @Safe(callBack = "throwMethod")
     public void safe(View view) {
         str.toString();
     }
 
     @SingleClick(value = 2000L)
-    private void onclick(){
+    private void onclick() {
         Log.e(TAG, "onclick: >>>>");
     }
 
-    private void throwMethod(Throwable throwable){
-        Log.e(TAG, "throwMethod: >>>>>"+throwable.toString());
+    private void throwMethod(Throwable throwable) {
+        Log.e(TAG, "throwMethod: >>>>>" + throwable.toString());
     }
 
     @Retry(count = 3, delay = 1000, asyn = true, retryCallback = "retryCallback")
     public boolean retry(View view) {
-        Log.e(TAG, "retryDo: >>>>>>"+Thread.currentThread().getName());
+        Log.e(TAG, "retryDo: >>>>>>" + Thread.currentThread().getName());
         return false;
     }
 
-    private void retryCallback(boolean result){
-        Log.e(TAG, "retryCallback: >>>>"+result);
+    private void retryCallback(boolean result) {
+        Log.e(TAG, "retryCallback: >>>>" + result);
     }
 
     @Scheduled(interval = 1000L, count = 10, taskExpiredCallback = "taskExpiredCallback")
@@ -142,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
         Log.e(TAG, "scheduled: >>>>");
     }
 
-    private void taskExpiredCallback(){
+    private void taskExpiredCallback() {
         Log.e(TAG, "taskExpiredCallback: >>>>");
     }
 
@@ -159,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        Log.e(TAG, "onRequestPermissionsResult: "+requestCode+"permissions:"+permissions.toString());
+        Log.e(TAG, "onRequestPermissionsResult: " + requestCode + "permissions:" + permissions.toString());
     }
 
     @Intercept("login_intercept")
@@ -175,5 +177,21 @@ public class MainActivity extends AppCompatActivity {
     @PrefsEvict(key = "userId")
     public void logout(View view) {
         Log.e(TAG, "logout: >>>>>");
+    }
+
+    @OnClick({R.id.singleClick1, R.id.singleClick, R.id.singleClick2})
+    @SingleClick(ids = {R.id.singleClick, R.id.singleClick2})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.singleClick1:
+                Log.e("singleClick", "我不防抖");
+                break;
+            case R.id.singleClick:
+                Log.e("singleClick", "我防抖");
+                break;
+            case R.id.singleClick2:
+                Log.e("singleClick", "我防抖2");
+                break;
+        }
     }
 }

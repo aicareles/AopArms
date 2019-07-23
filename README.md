@@ -182,9 +182,20 @@ AopArms.init(this);
 8、过滤频繁点击
 ```
     //value默认500ms
-    @SingleClick(value = 2000L)
-    private void onclick(){
-        Log.e(TAG, "onclick: >>>>");
+    @OnClick({R.id.singleClick1, R.id.singleClick, R.id.singleClick2})
+    @SingleClick(ids = {R.id.singleClick, R.id.singleClick2})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.singleClick1:
+                Log.e("singleClick", "我不防抖");
+                break;
+            case R.id.singleClick:
+                Log.e("singleClick", "我防抖");
+                break;
+            case R.id.singleClick2:
+                Log.e("singleClick", "我防抖2");
+                break;
+        }
     }
 ```
 9、拦截篇(如登录)

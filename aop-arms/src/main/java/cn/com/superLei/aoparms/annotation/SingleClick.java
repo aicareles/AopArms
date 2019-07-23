@@ -1,5 +1,7 @@
 package cn.com.superLei.aoparms.annotation;
 
+import android.view.View;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -14,4 +16,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface SingleClick {
     long value() default  500L;
+
+    int[] ids() default {View.NO_ID};
 }

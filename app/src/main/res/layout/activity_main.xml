@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="getUser"
-        android:text="获取用户"/>
+        android:text="获取用户" />
 
     <Button
         android:id="@+id/removeUser"
@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/getUser"
         android:onClick="removeUser"
-        android:text="移除用户"/>
+        android:text="移除用户" />
 
     <Button
         android:id="@+id/getArticle"
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/removeUser"
         android:onClick="getArticle"
-        android:text="获取文章"/>
+        android:text="获取文章" />
 
     <Button
         android:id="@+id/removeArticle"
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/getArticle"
         android:onClick="removeArticle"
-        android:text="移除文章"/>
+        android:text="移除文章" />
 
     <Button
         android:id="@+id/permission"
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/getUser"
         android:onClick="permission"
-        android:text="请求权限"/>
+        android:text="请求权限" />
 
     <Button
         android:id="@+id/retry"
@@ -51,7 +51,7 @@
         android:layout_below="@+id/getUser"
         android:layout_toRightOf="@+id/permission"
         android:onClick="retry"
-        android:text="重试"/>
+        android:text="重试" />
 
     <Button
         android:id="@+id/safe"
@@ -60,7 +60,7 @@
         android:layout_below="@+id/getArticle"
         android:layout_toRightOf="@+id/retry"
         android:onClick="safe"
-        android:text="铺获异常"/>
+        android:text="铺获异常" />
 
     <Button
         android:id="@+id/asyn"
@@ -69,7 +69,7 @@
         android:layout_below="@+id/getArticle"
         android:layout_toRightOf="@+id/safe"
         android:onClick="asyn"
-        android:text="异步"/>
+        android:text="异步" />
 
     <Button
         android:id="@+id/scheduled"
@@ -77,34 +77,34 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/permission"
         android:onClick="scheduled"
-        android:text="定时任务"/>
+        android:text="定时任务" />
 
     <Button
         android:id="@+id/delay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/scheduled"
         android:layout_below="@+id/permission"
+        android:layout_toRightOf="@+id/scheduled"
         android:onClick="delay"
-        android:text="延迟任务"/>
+        android:text="延迟任务" />
 
     <Button
         android:id="@+id/cancelDelay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/delay"
         android:layout_below="@+id/permission"
+        android:layout_toRightOf="@+id/delay"
         android:onClick="cancelDelay"
-        android:text="取消延迟"/>
+        android:text="取消延迟" />
 
     <Button
         android:id="@+id/intercept"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/cancelDelay"
         android:layout_below="@+id/permission"
+        android:layout_toRightOf="@+id/cancelDelay"
         android:onClick="intercept"
-        android:text="拦截"/>
+        android:text="拦截" />
 
     <Button
         android:id="@+id/login"
@@ -112,7 +112,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/intercept"
         android:onClick="login"
-        android:text="登录"/>
+        android:text="登录" />
 
     <Button
         android:id="@+id/logout"
@@ -121,7 +121,29 @@
         android:layout_below="@+id/intercept"
         android:layout_toRightOf="@+id/login"
         android:onClick="logout"
-        android:text="登出"/>
+        android:text="登出" />
 
+    <Button
+        android:id="@+id/singleClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/intercept"
+        android:layout_toRightOf="@+id/logout"
+        android:text="防抖" />
+
+    <Button
+        android:id="@+id/singleClick1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/intercept"
+        android:layout_toRightOf="@+id/singleClick"
+        android:text="不防抖" />
+
+    <Button
+        android:id="@+id/singleClick2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login"
+        android:text="防抖2" />
 
 </RelativeLayout>

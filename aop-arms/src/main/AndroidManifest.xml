@@ -1,2 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cn.com.superLei.aoparms" />
+    package="cn.com.superLei.aoparms" >
+
+    <application>
+        <activity
+            android:name=".common.permission.AopPermissionActivity"
+            android:theme="@style/translucent" />
+    </application>
+</manifest>

@@ -10,7 +10,7 @@ apply plugin: 'android-aspectjx'
 
 dependencies {
     ...
-    implementation 'cn.com.superLei:aop-arms:1.0.2'
+    implementation 'cn.com.superLei:aop-arms:1.0.3'
 }
 ```
 2、项目跟目录的gradle脚本中加入
@@ -233,6 +233,35 @@ public class MyApplication extends Application {
     }
 }
 
+```
+10、动态授权篇
+```
+    1、开启请求权限
+    /**
+     * @param value 权限值
+     * @param rationale 拒绝后的下一次提示(开启后，拒绝后，下一次会先提示该权限申请提示语)
+     * @param requestCode 权限请求码标识
+     */
+    @Permission(value = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, rationale = "为了更好的体验，请打开相关权限")
+    public void permission(View view) {
+        Log.e(TAG, "permission: 权限已打开");
+    }
+
+    2、请求拒绝注解回调
+    @PermissionDenied
+    public void permissionDenied(int requestCode, List<String> denyList){
+        Log.e(TAG, "permissionDenied: "+requestCode);
+        Log.e(TAG, "permissionDenied>>>: "+denyList.toString());
+    }
+
+    3、请求拒绝且不在提示注解回调
+    @PermissionNoAskDenied
+    public void permissionNoAskDenied(int requestCode, List<String> denyNoAskList){
+        Log.e(TAG, "permissionNoAskDenied: "+requestCode);
+        Log.e(TAG, "permissionNoAskDenied>>>: "+denyNoAskList.toString());
+        //前往设置页面打开权限
+        AopPermissionUtils.showGoSetting(this, "为了更好的体验，建议前往设置页面打开权限");
+    }
 ```
 #### 四、参考
 * [HujiangTechnology/gradle_plugin_android_aspectjx](https://github.com/HujiangTechnology/gradle_plugin_android_aspectjx)

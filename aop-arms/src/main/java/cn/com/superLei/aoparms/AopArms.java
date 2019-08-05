@@ -20,7 +20,7 @@ public class AopArms {
 
     public static Context getContext(){
         if (mContext == null){
-            throw new IllegalStateException("please init BaseLibApi");
+            throw new IllegalStateException("please init AopArms");
         }
         return mContext;
     }

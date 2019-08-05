@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -20,12 +21,15 @@ import cn.com.superLei.aoparms.annotation.Delay;
 import cn.com.superLei.aoparms.annotation.DelayAway;
 import cn.com.superLei.aoparms.annotation.Intercept;
 import cn.com.superLei.aoparms.annotation.Permission;
+import cn.com.superLei.aoparms.annotation.PermissionDenied;
+import cn.com.superLei.aoparms.annotation.PermissionNoAskDenied;
 import cn.com.superLei.aoparms.annotation.Prefs;
 import cn.com.superLei.aoparms.annotation.PrefsEvict;
 import cn.com.superLei.aoparms.annotation.Retry;
 import cn.com.superLei.aoparms.annotation.Safe;
 import cn.com.superLei.aoparms.annotation.Scheduled;
 import cn.com.superLei.aoparms.annotation.SingleClick;
+import cn.com.superLei.aoparms.common.permission.AopPermissionUtils;
 import cn.com.superLei.aoparms.common.utils.ArmsCache;
 import cn.com.superLei.aoparms.common.utils.ArmsPreference;
 
@@ -48,9 +52,22 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Permission({Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE})
+    @Permission(value = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, rationale = "为了更好的体验，请打开相关权限")
     public void permission(View view) {
-        Log.e(TAG, "permission: ");
+        Log.e(TAG, "permission: 权限已打开");
+    }
+
+    @PermissionDenied
+    public void permissionDenied(int requestCode, List<String> denyList){
+        Log.e(TAG, "permissionDenied: "+requestCode);
+        Log.e(TAG, "permissionDenied>>>: "+denyList.toString());
+    }
+
+    @PermissionNoAskDenied
+    public void permissionNoAskDenied(int requestCode, List<String> denyNoAskList){
+        Log.e(TAG, "permissionNoAskDenied: "+requestCode);
+        Log.e(TAG, "permissionNoAskDenied>>>: "+denyNoAskList.toString());
+        AopPermissionUtils.showGoSetting(this, "为了更好的体验，建议前往设置页面打开权限");
     }
 
     /**

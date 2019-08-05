@@ -5,12 +5,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * description $desc$
+ * created by jerry on 2019/8/5.
+ */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface Permission {
-    String[] value();
+public @interface PermissionDenied {
 
-    int requestCode() default 1;
-
-    String rationale() default "";
+//    int requestCode() default 0;
 }

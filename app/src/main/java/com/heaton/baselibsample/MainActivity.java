@@ -52,17 +52,33 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * 开启请求权限注解
+     * @ value 权限值
+     * @ rationale 拒绝后的下一次提示(开启后，拒绝后，下一次会先提示该权限申请提示语)
+     * @ requestCode 权限请求码标识
+     */
     @Permission(value = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, rationale = "为了更好的体验，请打开相关权限")
     public void permission(View view) {
         Log.e(TAG, "permission: 权限已打开");
     }
 
+    /**
+     * 请求拒绝注解回调
+     * @param requestCode 权限请求码标识
+     * @param denyList 被拒绝的权限集合
+     */
     @PermissionDenied
     public void permissionDenied(int requestCode, List<String> denyList){
         Log.e(TAG, "permissionDenied: "+requestCode);
         Log.e(TAG, "permissionDenied>>>: "+denyList.toString());
     }
 
+    /**
+     * 请求拒绝且不在提示注解回调
+     * @param requestCode 权限请求码标识
+     * @param denyNoAskList 被拒绝且不再提示的权限集合
+     */
     @PermissionNoAskDenied
     public void permissionNoAskDenied(int requestCode, List<String> denyNoAskList){
         Log.e(TAG, "permissionNoAskDenied: "+requestCode);

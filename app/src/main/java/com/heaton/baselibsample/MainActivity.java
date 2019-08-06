@@ -191,12 +191,6 @@ public class MainActivity extends AppCompatActivity {
         Log.e(TAG, "cancelDelay: >>>>");
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        Log.e(TAG, "onRequestPermissionsResult: " + requestCode + "permissions:" + permissions.toString());
-    }
-
     @Intercept("login_intercept")
     public void intercept(View view) {
         Log.e(TAG, "intercept: 已登陆>>>>");
@@ -212,18 +206,18 @@ public class MainActivity extends AppCompatActivity {
         Log.e(TAG, "logout: >>>>>");
     }
 
-    @OnClick({R.id.singleClick1, R.id.singleClick, R.id.singleClick2})
     @SingleClick(ids = {R.id.singleClick, R.id.singleClick2})
+    @OnClick({R.id.singleClick1, R.id.singleClick, R.id.singleClick2})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.singleClick1:
-                Log.e("singleClick", "我不防抖");
+                Log.e(TAG, "我不防抖");
                 break;
             case R.id.singleClick:
-                Log.e("singleClick", "我防抖");
+                Log.e(TAG, "我防抖");
                 break;
             case R.id.singleClick2:
-                Log.e("singleClick", "我防抖2");
+                Log.e(TAG, "我防抖2");
                 break;
         }
     }

@@ -70,7 +70,7 @@ public class ScheduledAspect {
         if (Preconditions.isNotBlank(taskExpiredCallback)) {
 
             try {
-                Reflect.on(joinPoint.getTarget()).call(taskExpiredCallback);
+                Reflect.on(joinPoint.getTarget()).callback(taskExpiredCallback);
             } catch (ReflectException exception) {
                 exception.printStackTrace();
                 Log.e(TAG, "no method "+taskExpiredCallback);

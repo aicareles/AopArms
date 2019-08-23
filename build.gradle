@@ -7,7 +7,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.5.0'
         classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.4'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         classpath 'com.novoda:bintray-release:0.8.0'

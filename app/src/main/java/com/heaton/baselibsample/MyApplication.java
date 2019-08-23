@@ -44,21 +44,18 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mApplication = this;
-        AopArms.init(this);
+//        AopArms.init(this);
 
-        AopArms.setInterceptor(new Interceptor() {
-            @Override
-            public boolean intercept(String key, String methodName) throws Throwable {
-                Log.e(TAG, "intercept methodName:>>>>>"+methodName);
-                if ("login_intercept".equals(key)){
-                    String userId = ArmsPreference.get(mApplication, "userId", "");
-                    if (TextUtils.isEmpty(userId)){
-                        Toast.makeText(mApplication, "您还没有登录", Toast.LENGTH_SHORT).show();
-                        return true;
-                    }
+        AopArms.setInterceptor((key, methodName) -> {
+            Log.e(TAG, "intercept methodName:>>>>>"+methodName);
+            if ("login_intercept".equals(key)){
+                String userId = ArmsPreference.get(mApplication, "userId", "");
+                if (TextUtils.isEmpty(userId)){
+                    Toast.makeText(mApplication, "您还没有登录", Toast.LENGTH_SHORT).show();
+                    return true;
                 }
-                return false;
             }
+            return false;
         });
 
     }

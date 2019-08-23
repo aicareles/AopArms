@@ -263,11 +263,18 @@ public class MyApplication extends Application {
         AopPermissionUtils.showGoSetting(this, "为了更好的体验，建议前往设置页面打开权限");
     }
 ```
-#### 四、参考
+#### 四、混淆
+```
+#AopArms
+-keepclassmembers class * {
+    @cn.com.superLei.aoparms.annotation.Callback <methods>;
+}
+```
+#### 五、参考
 * [HujiangTechnology/gradle_plugin_android_aspectjx](https://github.com/HujiangTechnology/gradle_plugin_android_aspectjx)
 * [深入理解Android之AOP](https://blog.csdn.net/innost/article/details/49387395)
 
-#### 五、许可证
+#### 六、许可证
 ```
 Copyright 2016 liulei
 

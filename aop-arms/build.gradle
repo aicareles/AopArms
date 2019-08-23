@@ -8,8 +8,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 2
-        versionName "1.0.3"
+        versionCode 3
+        versionName "1.0.4"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -59,7 +59,7 @@ publish{
     userOrg = 'superliu'//bintray.com的用户名
     groupId = 'cn.com.superLei'//一个唯一值，默认包名,生成的gradle依赖前缀
     artifactId = 'aop-arms'//远程仓库包名称
-    publishVersion = '1.0.3'
+    publishVersion = '1.0.4'
     desc = 'A very convenient aop library for Android'
     website = 'https://github.com/AICareless/AopArms'
     licences = ['Apache-2.0']

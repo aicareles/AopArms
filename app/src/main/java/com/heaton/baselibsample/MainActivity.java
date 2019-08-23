@@ -14,21 +14,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.com.superLei.aoparms.annotation.Async;
-import cn.com.superLei.aoparms.annotation.Cache;
-import cn.com.superLei.aoparms.annotation.CacheEvict;
-import cn.com.superLei.aoparms.annotation.Delay;
-import cn.com.superLei.aoparms.annotation.DelayAway;
-import cn.com.superLei.aoparms.annotation.Intercept;
-import cn.com.superLei.aoparms.annotation.Permission;
-import cn.com.superLei.aoparms.annotation.PermissionDenied;
-import cn.com.superLei.aoparms.annotation.PermissionNoAskDenied;
-import cn.com.superLei.aoparms.annotation.Prefs;
-import cn.com.superLei.aoparms.annotation.PrefsEvict;
-import cn.com.superLei.aoparms.annotation.Retry;
-import cn.com.superLei.aoparms.annotation.Safe;
-import cn.com.superLei.aoparms.annotation.Scheduled;
-import cn.com.superLei.aoparms.annotation.SingleClick;
+import cn.com.superLei.aoparms.annotation.*;
 import cn.com.superLei.aoparms.common.permission.AopPermissionUtils;
 import cn.com.superLei.aoparms.common.utils.ArmsCache;
 import cn.com.superLei.aoparms.common.utils.ArmsPreference;
@@ -158,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
         Log.e(TAG, "onclick: >>>>");
     }
 
+    @Callback
     private void throwMethod(Throwable throwable) {
         Log.e(TAG, "throwMethod: >>>>>" + throwable.toString());
     }
@@ -168,7 +155,8 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    private void retryCallback(boolean result) {
+    @Callback
+    public void retryCallback(boolean result) {
         Log.e(TAG, "retryCallback: >>>>" + result);
     }
 
@@ -177,6 +165,7 @@ public class MainActivity extends AppCompatActivity {
         Log.e(TAG, "scheduled: >>>>");
     }
 
+    @Callback
     private void taskExpiredCallback() {
         Log.e(TAG, "taskExpiredCallback: >>>>");
     }

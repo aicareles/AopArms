@@ -3,6 +3,9 @@
  */
 package cn.com.superLei.aoparms.common.reflect;
 
+import android.util.Log;
+
+import java.lang.annotation.Annotation;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -14,6 +17,9 @@ import java.lang.reflect.Proxy;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import cn.com.superLei.aoparms.annotation.Callback;
+import cn.com.superLei.aoparms.annotation.Safe;
 
 public class Reflect {
 
@@ -248,6 +254,39 @@ public class Reflect {
         return call(name, new Object[0]);
     }
 
+
+    /**
+     * 指定方法的注解类型 如：方法上有@Callback才会调用该方法
+     * 调用方法根据传入的参数
+     * @param name
+     * @param args
+     * @return
+     * @throws ReflectException
+     */
+    public void callback(String name, Object... args) throws ReflectException {
+        Class<?>[] types = types(args);
+        try {
+            Method method = exactMethod(name, types);
+            callbackOn(method, args);
+        } catch (NoSuchMethodException e) {
+            try {
+                Method method = similarMethod(name, types);
+                callbackOn(method, args);
+            } catch (NoSuchMethodException e1) {
+                throw new ReflectException(e1);
+            }
+        }
+    }
+
+    private void callbackOn(Method method, Object[] args) {
+        Annotation[] methodAnnotations = method.getAnnotations();
+        for (Annotation annotation : methodAnnotations){
+            if (annotation instanceof Callback){
+                on(method, object, args);
+                break;
+            }
+        }
+    }
 
     /**
      * 调用方法根据传入的参数

@@ -102,9 +102,8 @@ public class RetryAspect {
 
     private void doRetryResult(ProceedingJoinPoint joinPoint, String retryCallback, boolean result){
         if (Preconditions.isNotBlank(retryCallback)) {
-
             try {
-                Reflect.on(joinPoint.getTarget()).call(retryCallback, result);
+                Reflect.on(joinPoint.getTarget()).callback(retryCallback, result);
             } catch (ReflectException exception) {
                 exception.printStackTrace();
                 Log.e(TAG, "no method "+retryCallback);

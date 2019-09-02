@@ -279,12 +279,15 @@ public class Reflect {
     }
 
     private void callbackOn(Method method, Object[] args) {
-        Annotation[] methodAnnotations = method.getAnnotations();
+        /*Annotation[] methodAnnotations = method.getAnnotations();
         for (Annotation annotation : methodAnnotations){
             if (annotation instanceof Callback){
                 on(method, object, args);
                 break;
             }
+        }*/
+        if (method.isAnnotationPresent(Callback.class)){
+            on(method, object, args);
         }
     }
 

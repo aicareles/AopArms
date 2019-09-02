@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Callback
-    private void throwMethod(Throwable throwable) {
+    public void throwMethod(Throwable throwable) {
         Log.e(TAG, "throwMethod: >>>>>" + throwable.toString());
     }
 
@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Callback
-    private void taskExpiredCallback() {
+    public void taskExpiredCallback() {
         Log.e(TAG, "taskExpiredCallback: >>>>");
     }
 

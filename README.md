@@ -10,7 +10,7 @@ apply plugin: 'android-aspectjx'
 
 dependencies {
     ...
-    implementation 'cn.com.superLei:aop-arms:1.0.3'
+    implementation 'cn.com.superLei:aop-arms:1.0.4'
 }
 ```
 2、项目跟目录的gradle脚本中加入
@@ -116,8 +116,9 @@ AopArms.init(this);
         str.toString();
     }
     
-    //自定义回调方法（注意要和callBack的值保持一致）
-    private void throwMethod(Throwable throwable){
+    //自定义回调方法（注意要和callBack的值保持一致）,必须要有Callback注解
+    @Callback
+    public void throwMethod(Throwable throwable){
         Log.e(TAG, "throwMethod: >>>>>"+throwable.toString());
     }
 ```
@@ -135,8 +136,9 @@ AopArms.init(this);
         Log.e(TAG, "retryDo: >>>>>>"+Thread.currentThread().getName());
         return false;
     }
-    
-    private void retryCallback(boolean result){
+
+    @Callback
+    public void retryCallback(boolean result){
         Log.e(TAG, "retryCallback: >>>>"+result);
     }
 ```
@@ -156,8 +158,9 @@ AopArms.init(this);
     public void scheduled() {
         Log.e(TAG, "scheduled: >>>>");
     }
-    
-    private void taskExpiredCallback(){
+
+    @Callback
+    public void taskExpiredCallback(){
         Log.e(TAG, "taskExpiredCallback: >>>>");
     }
 ```

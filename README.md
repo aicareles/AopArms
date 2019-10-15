@@ -275,7 +275,7 @@ public class MyApplication extends Application {
     }
 ```
 
-![](https://user-gold-cdn.xitu.io/2019/10/15/16dce4f65a271404?w=1332&h=71&f=png&s
+![](https://user-gold-cdn.xitu.io/2019/10/15/16dce4f65a271404?w=1332&h=71&f=png&s=9122)
 #### 四、混淆
 ```
 #AopArms

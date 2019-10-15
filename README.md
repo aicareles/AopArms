@@ -266,6 +266,16 @@ public class MyApplication extends Application {
         AopPermissionUtils.showGoSetting(this, "为了更好的体验，建议前往设置页面打开权限");
     }
 ```
+11、测试方法耗时篇
+```
+    @TimeLog
+    public void getUser(View view) {
+        ArrayList<User> users = ArmsCache.get(this).getAsList("userList", User.class);
+        Log.e(TAG, "getUser: " + users);
+    }
+```
+
+![](https://user-gold-cdn.xitu.io/2019/10/15/16dce4f65a271404?w=1332&h=71&f=png&s
 #### 四、混淆
 ```
 #AopArms

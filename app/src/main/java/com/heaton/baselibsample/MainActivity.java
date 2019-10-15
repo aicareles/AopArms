@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
         Log.e(TAG, "getArticle: " + article);
     }
 
+    @TimeLog
     public void getUser(View view) {
         ArrayList<User> users = ArmsCache.get(this).getAsList("userList", User.class);
         Log.e(TAG, "getUser: " + users);

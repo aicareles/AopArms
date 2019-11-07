@@ -7,6 +7,8 @@ import android.widget.Toast;
 
 import cn.com.superLei.aoparms.AopArms;
 import cn.com.superLei.aoparms.callback.Interceptor;
+import cn.com.superLei.aoparms.callback.StatisticCallback;
+import cn.com.superLei.aoparms.common.statistic.StatisticInfo;
 import cn.com.superLei.aoparms.common.utils.ArmsPreference;
 
 
@@ -44,7 +46,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mApplication = this;
-//        AopArms.init(this);
+        AopArms.init(this);
 
         AopArms.setInterceptor((key, methodName) -> {
             Log.e(TAG, "intercept methodName:>>>>>"+methodName);
@@ -56,6 +58,9 @@ public class MyApplication extends Application {
                 }
             }
             return false;
+        });
+        AopArms.setStatisticCallback(statisticInfo -> {
+            Log.e(TAG, "statisticInfo: "+statisticInfo.toString());
         });
 
     }

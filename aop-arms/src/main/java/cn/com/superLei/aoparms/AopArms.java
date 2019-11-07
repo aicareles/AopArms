@@ -1,9 +1,12 @@
 package cn.com.superLei.aoparms;
 
 import android.annotation.SuppressLint;
+import android.app.Application;
 import android.content.Context;
 
 import cn.com.superLei.aoparms.callback.Interceptor;
+import cn.com.superLei.aoparms.callback.StatisticCallback;
+import cn.com.superLei.aoparms.common.statistic.StatisticsLife;
 
 /**
  * description $desc$
@@ -11,18 +14,24 @@ import cn.com.superLei.aoparms.callback.Interceptor;
  */
 public class AopArms {
     @SuppressLint("StaticFieldLeak")
-    private static Context mContext;
+    private static Application application;
     private static Interceptor sInterceptor;
+    private static StatisticCallback statisticCallback;
 
-    public static void init(Context context){
-        mContext = context;
+    public static void init(Application app){
+        application = app;
+        StatisticsLife.registerStatisticsLife(application);
+    }
+
+    public static Application getApplication(){
+        if (application == null){
+            throw new IllegalStateException("please init AopArms");
+        }
+        return application;
     }
 
     public static Context getContext(){
-        if (mContext == null){
-            throw new IllegalStateException("please init AopArms");
-        }
-        return mContext;
+        return getApplication().getApplicationContext();
     }
 
     public static void setInterceptor(Interceptor interceptor){
@@ -33,5 +42,11 @@ public class AopArms {
         return sInterceptor;
     }
 
+    public static StatisticCallback getStatisticCallback() {
+        return statisticCallback;
+    }
 
+    public static void setStatisticCallback(StatisticCallback statisticCallback) {
+        AopArms.statisticCallback = statisticCallback;
+    }
 }

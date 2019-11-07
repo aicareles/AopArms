@@ -19,7 +19,7 @@ public class AopArmsInitProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        AopArms.init(getContext());
+//        AopArms.init(getContext());
         return true;
     }
 

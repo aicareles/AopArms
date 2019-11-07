@@ -146,4 +146,13 @@
         android:layout_below="@+id/login"
         android:text="防抖2" />
 
+    <Button
+        android:id="@+id/statistic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login"
+        android:layout_toRightOf="@+id/singleClick2"
+        android:onClick="statistic"
+        android:text="统计" />
+
 </RelativeLayout>

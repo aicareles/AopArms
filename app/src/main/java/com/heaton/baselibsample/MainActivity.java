@@ -19,9 +19,8 @@ import cn.com.superLei.aoparms.common.permission.AopPermissionUtils;
 import cn.com.superLei.aoparms.common.utils.ArmsCache;
 import cn.com.superLei.aoparms.common.utils.ArmsPreference;
 
-
+@Statistics(Constant.MAIN_ACTIVITY_STATISTIC_KEY)
 public class MainActivity extends AppCompatActivity {
-
     private static final String TAG = "MainActivity";
     private String str;
 
@@ -210,5 +209,10 @@ public class MainActivity extends AppCompatActivity {
                 Log.e(TAG, "我防抖2");
                 break;
         }
+    }
+
+    @Statistics(Constant.TEST_CLICK_STATISTIC_KEY)
+    public void statistic(View view) {
+        Log.e(TAG, "statistic: ");
     }
 }

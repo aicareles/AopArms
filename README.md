@@ -297,7 +297,7 @@ public class MyApplication extends Application {
 其中StatisticInfo类中包含了key、开始时间、activity或者方法的标志、activity的生命周期等
 
 ```
-![](https://user-gold-cdn.xitu.io/2019/11/26/16ea725d581af694?w=1634&h=54&f=png&s=3122)
+![](https://user-gold-cdn.xitu.io/2019/11/26/16ea725d581af694?w=1634&h=71&f=png&s=9122)
 
 #### 四、混淆
 ```

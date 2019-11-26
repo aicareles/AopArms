@@ -276,6 +276,29 @@ public class MyApplication extends Application {
 ```
 
 ![](https://user-gold-cdn.xitu.io/2019/10/15/16dce4f65a271404?w=1332&h=71&f=png&s=9122)
+
+12、统计页面、方法等埋点
+```
+    //设置全局的回调(建议放到application中)
+    AopArms.setStatisticCallback(statisticInfo -> {
+       Log.e(TAG, "statisticInfo: "+statisticInfo.toString());
+    });
+
+    //activity中使用:
+    @Statistics(Constant.MAIN_ACTIVITY_STATISTIC_KEY)
+    public class MainActivity extends AppCompatActivity {...}
+
+    //方法中使用:
+    @Statistics(Constant.TEST_CLICK_STATISTIC_KEY)
+    public void statistic(View view) {
+       Log.e(TAG, "statistic: ");
+    }
+
+其中StatisticInfo类中包含了key、开始时间、activity或者方法的标志、activity的生命周期等
+
+```
+![](https://user-gold-cdn.xitu.io/2019/11/26/16ea725d581af694?w=1634&h=54&f=p
+
 #### 四、混淆
 ```
 #AopArms

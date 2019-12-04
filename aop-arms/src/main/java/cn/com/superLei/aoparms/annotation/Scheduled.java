@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 @Target(ElementType.METHOD)
 public @interface Scheduled {
 
+    String key() default "";
     /**
      * 初始化延迟
      * @return

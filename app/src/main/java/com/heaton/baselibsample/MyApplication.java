@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import cn.com.superLei.aoparms.AopArms;
+import cn.com.superLei.aoparms.annotation.Delay;
 import cn.com.superLei.aoparms.callback.Interceptor;
 import cn.com.superLei.aoparms.callback.StatisticCallback;
 import cn.com.superLei.aoparms.common.statistic.StatisticInfo;
@@ -48,6 +49,7 @@ public class MyApplication extends Application {
         mApplication = this;
         AopArms.init(this);
 
+
         AopArms.setInterceptor((key, methodName) -> {
             Log.e(TAG, "intercept methodName:>>>>>"+methodName);
             if ("login_intercept".equals(key)){
@@ -63,6 +65,11 @@ public class MyApplication extends Application {
             Log.e(TAG, "statisticInfo: "+statisticInfo.toString());
         });
 
+    }
+
+    @Delay(delay = 100L, priority = 10)
+    public void initSDK(){
+        //...
     }
 
     public static MyApplication getInstance() {

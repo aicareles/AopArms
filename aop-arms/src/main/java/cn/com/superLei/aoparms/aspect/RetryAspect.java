@@ -53,19 +53,22 @@ public class RetryAspect {
             public void subscribe(ObservableEmitter<Boolean> emitter) throws Exception {
                 Boolean value = false;
                 try {
+                    Log.e(TAG, "任务重试中,当前重试次数>>>>"+retryCount+"---"+Thread.currentThread().getName());
                     value = (Boolean) joinPoint.proceed();
                 } catch (Throwable throwable) {
                     throwable.printStackTrace();
                 }
                 if (value){
-                    Log.e(TAG, "任务请求成功,当前重试次数>>>>"+count);
+                    Log.e(TAG, "任务请求成功,当前重试次数>>>>"+retryCount);
                     doRetryResult(joinPoint, retryCallback, true);
                     retryCount = 0;
                 }else {
                     throw new Exception("任务请求失败,准备重试...");
                 }
             }
-        }).retryWhen(new Function<Observable<Throwable>, ObservableSource<?>>() {
+        }).observeOn(Schedulers.io())
+          .subscribeOn(asyn ? Schedulers.io() : AndroidSchedulers.mainThread())
+          .retryWhen(new Function<Observable<Throwable>, ObservableSource<?>>() {
             @Override
             public ObservableSource<?> apply(Observable<Throwable> throwableObservable) throws Exception {
                 return throwableObservable
@@ -81,10 +84,7 @@ public class RetryAspect {
                             }
                         });
             }
-        })
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(asyn ? Schedulers.io() : AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Boolean>() {
+        }).subscribe(new Consumer<Boolean>() {
                     @Override
                     public void accept(Boolean aBoolean) throws Exception {
                         Log.e(TAG, "accept: >>>>>" + aBoolean);

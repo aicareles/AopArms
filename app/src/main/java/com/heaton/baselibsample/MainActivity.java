@@ -1,10 +1,7 @@
 package com.heaton.baselibsample;
 
 import android.Manifest;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -14,7 +11,26 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.com.superLei.aoparms.annotation.*;
+import cn.com.superLei.aoparms.annotation.Async;
+import cn.com.superLei.aoparms.annotation.Cache;
+import cn.com.superLei.aoparms.annotation.CacheEvict;
+import cn.com.superLei.aoparms.annotation.Callback;
+import cn.com.superLei.aoparms.annotation.Delay;
+import cn.com.superLei.aoparms.annotation.DelayAway;
+import cn.com.superLei.aoparms.annotation.Intercept;
+import cn.com.superLei.aoparms.annotation.MainThread;
+import cn.com.superLei.aoparms.annotation.Permission;
+import cn.com.superLei.aoparms.annotation.PermissionDenied;
+import cn.com.superLei.aoparms.annotation.PermissionNoAskDenied;
+import cn.com.superLei.aoparms.annotation.Prefs;
+import cn.com.superLei.aoparms.annotation.PrefsEvict;
+import cn.com.superLei.aoparms.annotation.Retry;
+import cn.com.superLei.aoparms.annotation.Safe;
+import cn.com.superLei.aoparms.annotation.Scheduled;
+import cn.com.superLei.aoparms.annotation.ScheduledAway;
+import cn.com.superLei.aoparms.annotation.SingleClick;
+import cn.com.superLei.aoparms.annotation.Statistics;
+import cn.com.superLei.aoparms.annotation.TimeLog;
 import cn.com.superLei.aoparms.common.permission.AopPermissionUtils;
 import cn.com.superLei.aoparms.common.utils.ArmsCache;
 import cn.com.superLei.aoparms.common.utils.ArmsPreference;
@@ -24,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private String str;
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -160,9 +175,14 @@ public class MainActivity extends AppCompatActivity {
         Log.e(TAG, "retryCallback: >>>>" + result);
     }
 
-    @Scheduled(interval = 1000L, count = 10, taskExpiredCallback = "taskExpiredCallback")
+    @Scheduled(key = "scheduled", interval = 1000L, count = 10, taskExpiredCallback = "taskExpiredCallback")
     public void scheduled(View view) {
         Log.e(TAG, "scheduled: >>>>");
+    }
+
+    @ScheduledAway(key = "scheduled")
+    public void cancelScheduled(View view){
+        Log.e(TAG, "cancelScheduled: >>>>");
     }
 
     @Callback
@@ -170,9 +190,9 @@ public class MainActivity extends AppCompatActivity {
         Log.e(TAG, "taskExpiredCallback: >>>>");
     }
 
-    @Delay(key = "test", delay = 10000L)
+    @Delay(key = "test", asyn = true, delay = 2000L)
     public void delay(View view) {
-        Log.e(TAG, "delay: >>>>>");
+        Log.e(TAG, "delay: >>>>>"+Thread.currentThread().getPriority());
     }
 
     @DelayAway(key = "test")
@@ -214,5 +234,10 @@ public class MainActivity extends AppCompatActivity {
     @Statistics(Constant.TEST_CLICK_STATISTIC_KEY)
     public void statistic(View view) {
         Log.e(TAG, "statistic: ");
+    }
+
+    @MainThread
+    public void mainThread(View view) {
+        Log.e(TAG, "mainThread: " + Thread.currentThread().getName());
     }
 }

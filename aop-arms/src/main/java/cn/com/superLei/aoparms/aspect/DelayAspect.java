@@ -11,7 +11,10 @@ import java.util.concurrent.TimeUnit;
 
 import cn.com.superLei.aoparms.annotation.Delay;
 import cn.com.superLei.aoparms.common.collection.NoEmptyHashMap;
+import cn.com.superLei.aoparms.common.utils.RxJavaHelper;
 import io.reactivex.Observable;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
@@ -35,11 +38,16 @@ public class DelayAspect {
             key = joinPoint.getSignature().getName();
         }
         long delayTime = delay.delay();
+        boolean asyn = delay.asyn();
+        int priority = delay.priority();
         TimeUnit unit = delay.timeUnit();
         Object result = null;
         if (delayTime>0) {
             final String finalKey = key;
+            Scheduler scheduler = RxJavaHelper.scheduler(priority);
             Disposable subscribe = Observable.timer(delayTime, unit)
+                    .subscribeOn(scheduler)
+                    .observeOn(asyn ? scheduler: AndroidSchedulers.mainThread())
                     .subscribe(new Consumer<Long>() {
                         @Override
                         public void accept(Long aLong) throws Exception {

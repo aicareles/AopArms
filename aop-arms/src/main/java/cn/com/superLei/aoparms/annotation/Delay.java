@@ -12,6 +12,14 @@ public @interface Delay {
 
     String key() default "";
 
+    /**
+     * 回调是否在异步线程
+     * @return
+     */
+    boolean asyn() default false;
+
+    int priority() default 5;//一旦改变优先级,则会重新new Thread
+
     long delay() default 0L; //延迟时间 单位是毫秒
 
     /**

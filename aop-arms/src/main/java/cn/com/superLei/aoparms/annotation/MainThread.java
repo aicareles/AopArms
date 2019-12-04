@@ -7,6 +7,5 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.CLASS)
 @Target(ElementType.METHOD)
-public @interface Async {
-//    int priority() default 5;//一旦改变优先级,则会重新new Thread
+public @interface MainThread {
 }

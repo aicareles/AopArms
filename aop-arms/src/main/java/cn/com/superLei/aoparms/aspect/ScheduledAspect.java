@@ -1,5 +1,6 @@
 package cn.com.superLei.aoparms.aspect;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -9,6 +10,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import java.util.concurrent.TimeUnit;
 
 import cn.com.superLei.aoparms.annotation.Scheduled;
+import cn.com.superLei.aoparms.common.collection.NoEmptyHashMap;
 import cn.com.superLei.aoparms.common.reflect.Reflect;
 import cn.com.superLei.aoparms.common.reflect.ReflectException;
 import cn.com.superLei.aoparms.common.utils.Preconditions;
@@ -31,12 +33,17 @@ public class ScheduledAspect {
     @Around("onScheduledMethod() && @annotation(scheduled)")
     public Object doScheduledMethod(final ProceedingJoinPoint joinPoint, Scheduled scheduled) throws Throwable {
 
+        String key = scheduled.key();
+        if (TextUtils.isEmpty(key)){
+            key = joinPoint.getSignature().getName();
+        }
         long initialDelay = scheduled.initialDelay();
         long interval = scheduled.interval();
         final int counts = scheduled.count();
         TimeUnit timeUnit = scheduled.timeUnit();
         final String taskExpiredCallback = scheduled.taskExpiredCallback();
         Object result = null;
+        String finalKey = key;
         disposable = Observable.interval(initialDelay+interval, interval, timeUnit)
                 .map(new Function<Long, Long>() {
                     @Override
@@ -57,11 +64,12 @@ public class ScheduledAspect {
                             if (disposable != null) {
                                 disposable.dispose();
                             }
+                            NoEmptyHashMap.getInstance().remove(finalKey);
                             doTaskExpiredCallback(joinPoint, taskExpiredCallback);
                         }
                     }
                 });
-
+        NoEmptyHashMap.getInstance().put(key, disposable);
         result = joinPoint.proceed();
         return result;
     }

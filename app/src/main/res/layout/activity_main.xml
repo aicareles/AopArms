@@ -80,11 +80,20 @@
         android:text="定时任务" />
 
     <Button
-        android:id="@+id/delay"
+        android:id="@+id/cancelScheduled"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/permission"
         android:layout_toRightOf="@+id/scheduled"
+        android:onClick="cancelScheduled"
+        android:text="取消定时" />
+
+    <Button
+        android:id="@+id/delay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/permission"
+        android:layout_toRightOf="@+id/cancelScheduled"
         android:onClick="delay"
         android:text="延迟任务" />
 
@@ -98,19 +107,10 @@
         android:text="取消延迟" />
 
     <Button
-        android:id="@+id/intercept"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/permission"
-        android:layout_toRightOf="@+id/cancelDelay"
-        android:onClick="intercept"
-        android:text="拦截" />
-
-    <Button
         android:id="@+id/login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/intercept"
+        android:layout_below="@+id/delay"
         android:onClick="login"
         android:text="登录" />
 
@@ -118,7 +118,7 @@
         android:id="@+id/logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/intercept"
+        android:layout_below="@+id/delay"
         android:layout_toRightOf="@+id/login"
         android:onClick="logout"
         android:text="登出" />
@@ -127,7 +127,7 @@
         android:id="@+id/singleClick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/intercept"
+        android:layout_below="@+id/delay"
         android:layout_toRightOf="@+id/logout"
         android:text="防抖" />
 
@@ -135,7 +135,7 @@
         android:id="@+id/singleClick1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/intercept"
+        android:layout_below="@+id/delay"
         android:layout_toRightOf="@+id/singleClick"
         android:text="不防抖" />
 
@@ -154,5 +154,23 @@
         android:layout_toRightOf="@+id/singleClick2"
         android:onClick="statistic"
         android:text="统计" />
+
+    <Button
+        android:id="@+id/mainThread"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login"
+        android:layout_toRightOf="@+id/statistic"
+        android:onClick="mainThread"
+        android:text="主线程" />
+
+    <Button
+        android:id="@+id/intercept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login"
+        android:layout_toRightOf="@+id/mainThread"
+        android:onClick="intercept"
+        android:text="拦截" />
 
 </RelativeLayout>

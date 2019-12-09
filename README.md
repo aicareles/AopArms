@@ -316,7 +316,7 @@ public class MyApplication extends Application {
         }
     }
 ```
-![](https://user-gold-cdn.xitu.io/2019/12/9/16ee89de3f6d2c7a?w=1399&h=307&f=png&s=2230)
+![](https://user-gold-cdn.xitu.io/2019/12/9/16ee8a6c7582d109?w=1399&h=307&f=png&s=24177)
 该打印结果就是delay方法的耗时时长
 ![](https://user-gold-cdn.xitu.io/2019/12/9/16ee89e4f7955c15?w=1542&h=330&f=png&s=2230)
 该打印结果是系统native层某方法的耗时时长

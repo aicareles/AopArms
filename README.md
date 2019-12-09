@@ -299,6 +299,28 @@ public class MyApplication extends Application {
 ```
 ![](https://user-gold-cdn.xitu.io/2019/11/26/16ea725d581af694?w=1634&h=71&f=png&s=9122)
 
+13、开启全局性能监控,监控每个方法的耗时时长(可配置时长),正式版必须关闭
+```
+    //在application类上添加注解@EnableSystrace,代表开启性能监控
+    @EnableSystrace(filter = 60L, containNative = true)//开启耗时监控,过滤时间>60ms,包含native系统方法
+    public class MyApplication extends Application {
+            ...
+    }
+
+    //测试
+    public void delay(View view) {
+        try {
+            Thread.sleep(400L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+```
+![](https://user-gold-cdn.xitu.io/2019/12/9/16ee89de3f6d2c7a?w=1399&h=307&f=png&s
+该打印结果就是delay方法的耗时时长
+![](https://user-gold-cdn.xitu.io/2019/12/9/16ee89e4f7955c15?w=1542&h=330&f=png&s=2230
+该打印结果是系统native层某方法的耗时时长
+
 #### 四、混淆
 ```
 #AopArms

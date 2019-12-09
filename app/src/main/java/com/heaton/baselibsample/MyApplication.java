@@ -6,10 +6,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import cn.com.superLei.aoparms.AopArms;
+import cn.com.superLei.aoparms.Options;
 import cn.com.superLei.aoparms.annotation.Delay;
-import cn.com.superLei.aoparms.callback.Interceptor;
-import cn.com.superLei.aoparms.callback.StatisticCallback;
-import cn.com.superLei.aoparms.common.statistic.StatisticInfo;
+import cn.com.superLei.aoparms.annotation.EnableSystrace;
 import cn.com.superLei.aoparms.common.utils.ArmsPreference;
 
 
@@ -38,6 +37,7 @@ import cn.com.superLei.aoparms.common.utils.ArmsPreference;
  * 　　　　　　　　　　┃┫┫　┃┫┫
  * 　　　　　　　　　　┗┻┛　┗┻┛
  */
+@EnableSystrace(filter = 60L, containNative = true)//开启耗时监控,过滤时间>60ms,包含native系统方法
 public class MyApplication extends Application {
 
     private static final String TAG = "MyApplication";
@@ -47,8 +47,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mApplication = this;
-        AopArms.init(this);
-
+        AopArms.init(this, new Options().setLoggable(true));
 
         AopArms.setInterceptor((key, methodName) -> {
             Log.e(TAG, "intercept methodName:>>>>>"+methodName);
@@ -65,9 +64,14 @@ public class MyApplication extends Application {
             Log.e(TAG, "statisticInfo: "+statisticInfo.toString());
         });
 
+        initSDK();
+
     }
 
-    @Delay(delay = 100L, priority = 10)
+    /**
+     * 异步初始化第三方sdk,可设置线程优先级
+     */
+    @Delay(delay = 100L, asyn = true, priority = 10)
     public void initSDK(){
         //...
     }

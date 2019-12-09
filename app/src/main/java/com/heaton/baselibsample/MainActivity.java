@@ -15,7 +15,6 @@ import cn.com.superLei.aoparms.annotation.Async;
 import cn.com.superLei.aoparms.annotation.Cache;
 import cn.com.superLei.aoparms.annotation.CacheEvict;
 import cn.com.superLei.aoparms.annotation.Callback;
-import cn.com.superLei.aoparms.annotation.Delay;
 import cn.com.superLei.aoparms.annotation.DelayAway;
 import cn.com.superLei.aoparms.annotation.Intercept;
 import cn.com.superLei.aoparms.annotation.MainThread;
@@ -49,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         initData();
 
         initArticle();
-
     }
 
     /**
@@ -190,8 +188,13 @@ public class MainActivity extends AppCompatActivity {
         Log.e(TAG, "taskExpiredCallback: >>>>");
     }
 
-    @Delay(key = "test", asyn = true, delay = 2000L)
+//    @Delay(key = "test", asyn = true, delay = 2000L)
     public void delay(View view) {
+        try {
+            Thread.sleep(400L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         Log.e(TAG, "delay: >>>>>"+Thread.currentThread().getPriority());
     }
 

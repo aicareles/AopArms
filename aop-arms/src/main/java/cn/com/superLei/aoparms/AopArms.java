@@ -4,9 +4,11 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 
+import cn.com.superLei.aoparms.annotation.EnableSystrace;
 import cn.com.superLei.aoparms.callback.Interceptor;
 import cn.com.superLei.aoparms.callback.StatisticCallback;
 import cn.com.superLei.aoparms.common.statistic.StatisticsLife;
+import cn.com.superLei.aoparms.common.systrace.SystraceMonitor;
 
 /**
  * description $desc$
@@ -19,8 +21,30 @@ public class AopArms {
     private static StatisticCallback statisticCallback;
 
     public static void init(Application app){
+        init(app, new Options());
+    }
+
+    public static void init(Application app, Options options){
+        if (app == null)throw new IllegalArgumentException("application is null");
         application = app;
+        AopLog.init(options);
         StatisticsLife.registerStatisticsLife(application);
+        systraceEnable(application);
+    }
+
+    private static void systraceEnable(Application app) {
+        Class<? extends Application> cls = app.getClass();
+        if (cls.isAnnotationPresent(EnableSystrace.class)){
+            EnableSystrace systrace = cls.getAnnotation(EnableSystrace.class);
+            if (systrace != null){
+                long filter = systrace.filter();
+                boolean containNative = systrace.containNative();
+                SystraceMonitor monitor = SystraceMonitor.getInstance();
+                monitor.setContainNative(containNative);
+                monitor.setFilterTime(filter);
+                monitor.start();
+            }
+        }
     }
 
     public static Application getApplication(){

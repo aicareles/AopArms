@@ -3,6 +3,7 @@ package cn.com.superLei.aoparms.common.statistic;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
+
 import java.lang.annotation.Annotation;
 
 import cn.com.superLei.aoparms.AopArms;
@@ -49,6 +50,7 @@ public class ActivityLifecycleImpl implements Application.ActivityLifecycleCallb
 
     @Override
     public void onActivityStopped(Activity activity) {
+
     }
 
     @Override
